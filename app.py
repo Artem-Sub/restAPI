@@ -1,27 +1,16 @@
 from flask import *
+from flask_restful import Resource
+
 
 app = Flask(__name__)
 
-
-@app.route('/sum/<a>/<b>', methods=['GET'])
-def get_tasks(a,b):
-    return jsonify(str(int(a)+int(b)))
-	
-
-@app.route('/mult/<a>/<b>', methods=['GET'])
-def get_tasks(a,b):
-	return str(int(a)*int(b))
+app.add_resource('sum/<a>/<b>', endpoint='sum')
 
 
-@app.route('/div/<a>/<b>', methods=['GET'])
-def get_tasks(a,b):
-	return str(int(a)/int(b))
+def get_sum(a,b):
+	return jsonify(str(int(a)+int(b)))
+   		
+@app.route(sum, methods=['GET'])
 
-@app.route('/sub/<a>/<b>', methods=['GET'])
-def get_tasks(a,b):
-	return str(int(a)-int(b))
-
-
-	
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
